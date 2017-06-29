@@ -1,10 +1,10 @@
 GPU=0
 CUDNN=0
-OPENCV=0
+OPENCV=1
 DEBUG=0
+UNAME := $(shell uname)
 
-ARCH= -gencode arch=compute_20,code=[sm_20,sm_21] \
-      -gencode arch=compute_30,code=sm_30 \
+ARCH=  -gencode arch=compute_30,code=sm_30 \
       -gencode arch=compute_35,code=sm_35 \
       -gencode arch=compute_50,code=[sm_50,compute_50] \
       -gencode arch=compute_52,code=[sm_52,compute_52]
@@ -23,7 +23,15 @@ NVCC=nvcc --compiler-options '-fPIC'
 AR=ar
 ARFLAGS=rcs
 OPTS=-O4
-LDFLAGS= -lm -pthread 
+LDFLAGS= -lm 
+ifeq ($(UNAME), Darwin)
+LDLAGS += -lpthread 
+endif
+
+ifeq ($(UNAME), Linux)
+LDLAGS += -pthread 
+endif
+
 COMMON= -Iinclude/ -Isrc/
 CFLAGS=-Wall -Wfatal-errors -fPIC
 
