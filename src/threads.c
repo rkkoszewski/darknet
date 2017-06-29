@@ -40,7 +40,8 @@ int sched_getaffinity(pid_t pid, size_t cpu_size, cpu_set_t *cpu_set)
     return -1;
   }
   cpu_set->count = 0;
-  for (int i = 0; i < core_count; i++) {
+  int i;
+  for (i = 0; i < core_count; i++) {
     cpu_set->count |= (1 << i);
   }
 
@@ -101,8 +102,8 @@ void threads_split (int loops, ThreadsCB_t callback, void *data) {
   int num_cores = sysconf(_SC_NPROCESSORS_ONLN);
   pthread_t thread_ptr[128];
   ThreadInfo_t thread_input[128] = {{0}};
-
-  for (int i=0; i < num_cores; i++) {
+  int i;
+  for (i=0; i < num_cores; i++) {
     /* create a second thread which executes inc_x(&x) */
     thread_input[i].loops      = loops; 
     thread_input[i].callback   = callback; 
@@ -119,7 +120,7 @@ void threads_split (int loops, ThreadsCB_t callback, void *data) {
   }
 
   /* wait for the threads to finish */
-  for (int i=0; i < num_cores; i++) {
+  for (i=0; i < num_cores; i++) {
     if(pthread_join(thread_ptr[i], NULL)) {
       fprintf(stderr, "Error joining thread %d\n", i);
       exit(2);
