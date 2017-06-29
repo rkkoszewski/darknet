@@ -25,11 +25,11 @@ ARFLAGS=rcs
 OPTS=-O4
 LDFLAGS= -lm 
 ifeq ($(UNAME), Darwin)
-LDLAGS += -lpthread 
+LDFLAGS += -lpthread 
 endif
 
 ifeq ($(UNAME), Linux)
-LDLAGS += -pthread 
+LDFLAGS += -pthread 
 endif
 
 COMMON= -Iinclude/ -Isrc/
