@@ -530,6 +530,9 @@ int main(int argc, char **argv)
 	fprintf(stdout, "test.jpg,person,0.1,0,0,1,1\n");
       }
       return 1;
+    } else if (0 == strcmp(argv[1], "cudaerror")){
+      fprintf(stdout, "CUDA Error: unknown error\n");
+      return 0;
     } else {
         fprintf(stderr, "Not an option: %s\n", argv[1]);
     }

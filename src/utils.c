@@ -29,7 +29,7 @@ double what_time_is_it_now()
       now.tv_sec = mts.tv_sec;
       now.tv_nsec = mts.tv_nsec;
     #else
-      clock_gettime(CLOCK_REALTIME, now);
+      clock_gettime(CLOCK_REALTIME, &now);
     #endif
     
     

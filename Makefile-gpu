@@ -1,6 +1,6 @@
 GPU=1
 CUDNN=1
-CUDNN6=0
+CUDNN6=1
 OPENCV=1
 DEBUG=0
 UNAME := $(shell uname)
